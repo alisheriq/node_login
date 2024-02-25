@@ -5,8 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <title>Register</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5; 
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            display:block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            color: #333;
+            background-color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px auto;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        li {
+            text-align: center;
+        }
+
+        button:hover {
+            color: #333;
+            background-color: #fff;
+        }
+        .admin-checkbox {
+        display: flex;
+        align-items: center;
+        }
+    </style>
 </head>
 <body>
+    <a href="/"> Home page </a>
+    <a href="/login"> Login </a>
     <h1>Register</h1>
 
     <ul>
@@ -16,7 +82,7 @@
         <% }) %>  <% } %>
     </ul>
 
-    <form action="/users/register" method="post">
+    <form action="/register" method="post">
         <div>
             <input type="text" id="name" name="name" placeholder="Name" required/>
         </div>
@@ -29,12 +95,13 @@
         <div>
             <input type="password" id="password2" name="password2" placeholder="Confirm password" required/>
         </div>
+        <div class="admin-checkbox">
+            <label for="isAdmin">Is Admin:</label>
+            <input type="checkbox" id="isAdmin" name="isAdmin">
+          </div>
         <div>
             <input type="submit" value="Register"/>
         </div>
-        <a href="/users/login">
-            Already registered? Login here
-        </a>
     </form>
 </body>
 </html>

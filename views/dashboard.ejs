@@ -4,10 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5; 
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, p {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            display:block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            color: #333;
+            background-color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px auto;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: #333;
+            background-color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .item-block {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .item-block h5 {
+            margin-top: 0;
+        }
+        .item-block h4 {
+            font-size: 16px; 
+            margin-top: 5px;
+        }
+        .item-block p {
+            font-size: 14px; 
+            margin-bottom: 5px;
+        }
+        .item-block img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+        }
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #333;
+        }
+        .logout-link:hover {
+            color: #555;
+        }
+    </style>
     <title>Dashboard</title>
 </head>
 <body>
-    <a href="/users/logout">Logout</a>
+    <a href="/admin">Admin panel</a>
+    <a href="/logout">Logout</a>
     <h1>Hello, <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+    <h3>Latest News by BBC Corporation</h3>
+
+    <% articles.slice(0, 2).forEach(article => { %>
+        <div class="item-block">
+            <h4><a href="<%= article.url %>"><%= article.title %></a></h4>
+            <p><%= article.description %></p>
+            <% if (article.urlToImage) { %>
+                <img src="<%= article.urlToImage %>" alt="Article Image" class="center">
+            <% } %>
+        </div>
+    <% }) %>
+
+    <h3>Posts</h3>
+
+    <% posts.forEach(post => { %>
+        <div class="item-block">
+            <h5>Post ID: <%= post.id %></h5>
+            <h4>Title: <%= post.title %></h4>
+            <h4>Description: <%= post.body %></h4>
+            <h4>Author: <%= post.author %></h4>
+            <h4>Last update: <%= post.updatedAt %></h4>
+        </div>
+    <% }) %>
 </body>
 </html>

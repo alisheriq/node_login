@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <title>Admin panel</title>
+    <style>
+        body {
+        font-family: sans-serif;
+        background-color: #f5f5f5;
+        margin: 20px;
+        padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, p {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        }
+
+        a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        }
+
+        a:hover {
+        color: #333;
+        background-color: #fff;
+        }
+
+        form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+
+        input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        }
+
+        button {
+        padding: 10px auto;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        button:hover {
+        color: #333;
+        background-color: #fff;
+        }
+
+        .recipe-container {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 20px;
+        }
+
+        .recipe-block {
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        width: 30%; 
+        }
+    </style>
+</head>
+<body>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+
+    <h1>Administration panel</h1>
+    <h4>Create new post</h4>
+    <form action="/admin/addPost" method="POST">
+        <div>
+            <input type="text" name="postTitle" placeholder="Post Title">
+        </div>
+        <div>
+            <textarea name="postBody" placeholder="Post Body"></textarea>
+        </div>
+        <div>
+            <button type="submit">Add post</button>
+        </div>
+    </form>
+
+    <h4>Update post by ID</h4>
+    <form action="/admin/editPost" method="POST">
+        <div>
+            <input type="text" name="postID" placeholder="Post ID">
+        </div>
+        <div>
+            <textarea name="newBody" placeholder="Post Body"></textarea>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+    <h4>Delete post by ID</h4>
+    <form action="/admin/deletePost" method="POST">
+        <div>
+            <input type="text" name="postIDforDelete" placeholder="Post ID">
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+
+    <h4>Let's cook, <%= user.charAt(0).toUpperCase() + user.slice(1) %></h4>
+    <form action="/admin/searchRecipes" method="GET">
+        <div>
+            <input type="text" name="query" placeholder="Dish name">
+        </div>
+        <div>
+            <button type="submit">Search</button>
+        </div>
+    </form>
+
+    <% if (recipes && recipes.length > 0) { %>
+        <h4>Recipes</h4>
+        <div class="recipe-container">
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe-block">
+                    <a href="<%= recipe.sourceUrl %>"><%= recipe.title %></a>
+                    <li>Ready in <%= recipe.readyInMinutes %> minutes</li>
+                    <li>Servings: <%= recipe.servings %></li>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+
+</body>
+</html>
